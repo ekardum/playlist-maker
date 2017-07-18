@@ -9,6 +9,4 @@ Before starting you have to install Node with this modules : Nightmare, get-yout
 
 2. Open cmd (or node.js) navigate to app folder and type start.js
 
-![Songlist](https://github.com/ekardum/playlist-maker/blob/master/screenshots/2.png?raw=true)
-
 3. Wait for app to complete running through all songs(it will open the playlist in your browser at the end) - and also it will create a text file with links of all songs separately (links.txt)
