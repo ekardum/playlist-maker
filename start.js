@@ -13,14 +13,14 @@ urls.reduce(function(accumulator, url) {
     return nightmare.goto('https://youtube.com')
       .wait('body')
       .evaluate(function() {
-       document.querySelector('input#masthead-search-term').value =''
+       document.querySelector('input#search').value =''
       })
-      .type('input#masthead-search-term', url)
+      .type('input#search', url)
       .wait('body')
-      .click('button#search-btn')
-      .wait('.yt-uix-tile-link.yt-ui-ellipsis.yt-ui-ellipsis-2.yt-uix-sessionlink.spf-link')
+      .click('button#search-icon-legacy')
+      .wait(1000)
       .evaluate(function () {
-       return document.querySelector('.yt-lockup-content > .yt-lockup-title > a.yt-uix-tile-link.yt-ui-ellipsis.yt-ui-ellipsis-2.yt-uix-sessionlink.spf-link:nth-child(1)').href;
+       return document.querySelector('.ytd-two-column-search-results-renderer #contents .ytd-item-section-renderer #video-title').href;
       })
       .then(function(result){
         results.push(result);
