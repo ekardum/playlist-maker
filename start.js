@@ -25,7 +25,7 @@ urls.reduce(function(accumulator, url) {
             .type('input#search', url)
             .wait('body')
             .click('button#search-icon-legacy')
-            .wait(1000)//.wait('.ytd-search') //.wait(1000)
+            .wait(1000)
             .evaluate(function() {
                 return document.querySelector('.ytd-two-column-search-results-renderer #contents .ytd-item-section-renderer #video-title').href;
             })
@@ -39,16 +39,10 @@ urls.reduce(function(accumulator, url) {
             });
     });
 }, Promise.resolve([])).then(function(results) {
-    /*console.dir(results)*/
     ;
-
-    //For array output
-    //fs.writeFileSync('songsList.json', JSON.stringify(results));
-
     results.forEach(function(url) {
         var id = getYouTubeID(url);
         playlist += id + ",";
-        //console.log(playlist);
     });
     var file = fs.createWriteStream('links.txt');
     file.on('error', function(err) {
@@ -58,15 +52,10 @@ urls.reduce(function(accumulator, url) {
         file.write(result + "\r\n");
     });
     file.end();
-    //console.log('Done!');
 }).then(function() {
-    //results.forEach(function(url) {
-    //    var id = getYouTubeID(url);
-    //    var ids= playlist += id +",";
     console.log(playlist);
     opn(playlist);
     console.log('Done!');
-    //});
 }).then(function() {
     return nightmare.end();
 });
